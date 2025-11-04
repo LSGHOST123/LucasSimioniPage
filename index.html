@@ -1,546 +1,774 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LSGHOST - Lucas Simioni | Especialista em Produtos Digitais</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LSGHOST - Lucas Simioni | Especialista em Produtos Digitais</title>
+  <meta name="description" content="LSGHOST | Lucas Simioni. Especialista em Produtos Digitais e Empreendedorismo Online. Produtos testados com mais de R$ 5.000 em vendas." />
+  <link rel="canonical" href="https://seudominio.com/" />
+  <meta property="og:title" content="LSGHOST - Lucas Simioni | Especialista em Produtos Digitais" />
+  <meta property="og:description" content="Produtos digitais que geram resultados. Mais de R$ 5.000 em vendas comprovadas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://seudominio.com/" />
+  <meta property="og:image" content="https://i.imgur.com/6Gm9v1l.png" />
+  <meta name="theme-color" content="#00ff77" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              greenBright: '#00ff77',
+              greenDeep: '#00b36b',
+              panel: '#071019',
+              page: '#000000',
+              muted: '#94b8a9',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          },
+          boxShadow: {
+            'neon-sm': '0 10px 30px rgba(0,179,107,0.06)',
+            'neon-md': '0 10px 40px rgba(0,179,107,0.10)',
+            'neon-lg': '0 30px 60px rgba(0,0,0,0.60)'
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-bright: #00ff77;
+      --green-deep:   #00b36b;
+      --panel-dark:   #071019;
+      --page-dark:    #000000;
+      --muted:        #94b8a9;
+    }
     body { font-family: 'Inter', sans-serif; }
 
-    /* ---------- Palette (preto + verde radiante) ---------- */
-    :root{
-      --green-bright: #00ff77; /* neon claro */
-      --green-deep:   #00b36b; /* verde mais escuro */
-      --panel-dark:   #071019; /* painéis / cards */
-      --page-dark:    #000000; /* fundo geral (preto total) */
-      --muted:        #94b8a9; /* textos secundários */
-    }
-
-    /* gradient original adaptado para verde radiante */
     .gradient-bg {
-      background: linear-gradient(135deg, rgba(0,255,119,0.14) 0%, rgba(0,179,107,0.12) 100%);
-      /* aplicação suave para não quebrar layout */
-      box-shadow: 0 8px 30px rgba(0,179,107,0.06);
+      background: radial-gradient(1200px 500px at 10% 10%, rgba(0,255,119,0.10), transparent 40%),
+                  radial-gradient(1000px 500px at 90% 10%, rgba(0,179,107,0.08), transparent 45%),
+                  radial-gradient(1000px 500px at 50% 100%, rgba(0,255,119,0.06), transparent 35%),
+                  linear-gradient(180deg, rgba(0,255,119,0.04), rgba(0,179,107,0.02));
       backdrop-filter: blur(6px);
+      box-shadow: 0 8px 30px rgba(0,179,107,0.06) inset;
     }
 
-    /* Neon glow for main highlights */
-    .neon-text {
-      color: var(--green-bright);
-      text-shadow: 0 0 8px rgba(0,255,119,0.30), 0 0 20px rgba(0,179,107,0.18);
-    }
-
-    .neon-border {
-      border: 1px solid rgba(0,255,119,0.12);
-      box-shadow: 0 10px 30px rgba(0,179,107,0.06);
-    }
-
+    .neon-text { color: var(--green-bright); text-shadow: 0 0 8px rgba(0,255,119,0.30), 0 0 20px rgba(0,179,107,0.18); }
+    .neon-border { border: 1px solid rgba(0,255,119,0.12); box-shadow: 0 10px 30px rgba(0,179,107,0.06); }
     .neon-panel {
       background: linear-gradient(180deg, rgba(0,255,119,0.03), rgba(0,179,107,0.02));
-      border-radius: 12px;
+      border-radius: 14px;
       box-shadow: 0 10px 30px rgba(0,179,107,0.03);
     }
+    .cta-glow { box-shadow: 0 6px 24px rgba(0,255,119,0.08), 0 0 26px rgba(0,179,107,0.04); }
 
-    /* subtle glow for CTA */
-    .cta-glow {
-      box-shadow: 0 6px 24px rgba(0,255,119,0.08), 0 0 26px rgba(0,179,107,0.04);
-    }
+    .card-hover { transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.60); }
 
-    .card-hover { transition: all 0.28s cubic-bezier(.2,.9,.2,1); }
-    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-
-    .pulse-animation { animation: pulse 2s infinite; }
+    .pulse { animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
-    .floating { animation: floating 3s ease-in-out infinite; }
-    @keyframes floating { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
+    .float { animation: float 3.2s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    .spin-slow { animation: spin-slow 6s linear infinite; }
     @keyframes spin-slow { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-    .animate-spin-slow { animation: spin-slow 6s linear infinite; }
+
+    .pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
     @keyframes pulse-slow { 0%,100%{transform:scale(1.02)} 50%{transform:scale(1.06)} }
-    .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
 
-    /* ---------- Dark theme overrides (ONLY colors, keep classes) ---------- */
+    .top-nav-blur { backdrop-filter: blur(10px) saturate(140%); }
 
-    /* Page background (maps to body class bg-gray-50 in your markup) */
-    .bg-gray-50 { background-color: var(--page-dark) !important; color: #e8fff4 !important; }
-
-    /* Convert white panels to dark panels */
-    .bg-white { background-color: var(--panel-dark) !important; color: #e8fff4 !important; }
-    .bg-white.bg-opacity-10 { background-color: rgba(7,16,25,0.45) !important; }
-
-    /* Titles — make them green-bright for emphasis */
-    .text-gray-800 { color: var(--green-bright) !important; text-shadow: 0 2px 10px rgba(0,179,107,0.06); }
-
-    /* Secondary text muted */
-    .text-gray-600 { color: var(--muted) !important; }
-    .text-gray-400 { color: rgba(148,184,169,0.6) !important; }
-
-    /* Lines and small accents (was green-600) -> keep green */
-    .bg-green-600, .from-green-600 { background-image: linear-gradient(90deg, var(--green-deep), var(--green-bright)) !important; color: #04110f !important; box-shadow: 0 8px 30px rgba(0,179,107,0.06) !important; }
-    .bg-green-100, .bg-green-50 { background-color: rgba(0,255,119,0.04) !important; color: var(--green-bright) !important; }
-
-    /* Replace orange accents (used many places) with green emphasis so products/buttons/info highlight in green */
-    .bg-orange-400, .bg-orange-500, .bg-orange-600, .bg-yellow-100, .bg-yellow-600 {
-      background-image: linear-gradient(90deg, var(--green-deep), var(--green-bright)) !important;
-      color: #04110f !important;
-      box-shadow: 0 8px 30px rgba(0,179,107,0.06) !important;
-    }
-    .text-green-100, .text-green-600 { color: var(--green-bright) !important; }
-
-    /* Replace red/orange badges borders with green deep */
-    .border-red-500, .border-orange-400, .border-red-400, .border-orange-400 {
-      border-color: var(--green-deep) !important;
-    }
-    .bg-red-500, .bg-orange-400 { background-color: var(--green-deep) !important; color: #e8fff4 !important; }
-
-    /* BUT — DO NOT touch the official brand button classes for YouTube and Instagram:
-       Keep .bg-red-600 and .bg-pink-600 intact so their look remains the same as original.
-       (We intentionally avoid overriding .bg-red-600 and .bg-pink-600) */
-
-    /* Small icon circle overrides (give them subtle green tint instead of pastel whites) */
-    .bg-orange-100, .bg-yellow-100, .bg-blue-100, .bg-indigo-100, .bg-teal-100, .bg-pink-100, .bg-purple-100, .bg-red-100, .bg-cyan-100 {
-      background-color: rgba(0,255,119,0.03) !important;
-      color: var(--green-bright) !important;
+    .glass {
+      background: linear-gradient(180deg, rgba(7,16,25,0.7), rgba(7,16,25,0.45));
+      border: 1px solid rgba(0,255,119,0.12);
+      box-shadow: 0 10px 30px rgba(0,179,107,0.06);
+      backdrop-filter: blur(8px);
     }
 
-    /* Shadows / contrast tweaks for dark mode */
-    .shadow-2xl { box-shadow: 0 30px 60px rgba(0,0,0,0.75) !important; }
-    .drop-shadow { text-shadow: 0 8px 30px rgba(0,0,0,0.75) !important; }
+    .brand-gradient {
+      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 6px 20px rgba(0,255,119,0.12));
+    }
 
-    /* Footer background */
-    .bg-gray-800 { background-color: #040404 !important; color: rgba(148,184,169,0.8) !important; }
+    .divider {
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
+      border-radius: 3px;
+      width: 100px;
+      margin: 0 auto;
+    }
 
-    /* Keep header text readable over gradient */
-    header.gradient-bg { color: #e8fff4; }
+    /* Back to top */
+    #toTop {
+      position: fixed; right: 16px; bottom: 16px;
+      width: 48px; height: 48px; display: grid; place-items: center;
+      background: linear-gradient(180deg, rgba(0,255,119,0.10), rgba(0,179,107,0.12));
+      border: 1px solid rgba(0,255,119,0.2);
+      color: var(--green-bright);
+      border-radius: 12px;
+      cursor: pointer;
+      opacity: 0; visibility: hidden;
+      transition: all .25s ease;
+      z-index: 60;
+    }
+    #toTop.visible { opacity: 1; visibility: visible; }
 
-    /* CTA buttons and product highlights: add subtle glow */
-    .block.w-full.bg-gradient-to-r.from-green-600.to-blue-600 {
-      background-image: linear-gradient(90deg, var(--green-deep), var(--green-bright)) !important;
-      color: #001312 !important;
+    /* Dark page baseline */
+    .bg-page { background-color: var(--page-dark); color: #e8fff4; }
+    .bg-panel { background-color: var(--panel-dark); color: #e8fff4; }
+    .text-muted { color: var(--muted); }
+
+    /* Buttons (preserve brand YT/IG colors) */
+    .btn-cta {
+      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
+      color: #001312;
       box-shadow: 0 10px 30px rgba(0,179,107,0.12);
     }
-
-    /* Floating circle logo (LS) — make it dark inner with green text glow */
-    .floating .w-32.h-32.mx-auto.bg-white {
-      background-color: #071019 !important;
-      color: var(--green-bright) !important;
-      text-shadow: 0 0 10px rgba(0,255,119,0.24);
+    .btn-outline {
+      border: 1px solid rgba(0,255,119,0.25);
+      color: var(--green-bright);
+      background: rgba(0,255,119,0.04);
     }
+    .btn-outline:hover { background: rgba(0,255,119,0.08); }
 
-    /* Ensure links and hover states remain visible */
-    a:hover { opacity: 0.95; }
-
-    /* Minor responsive color fixes */
-    @media (prefers-color-scheme: dark) {
-      /* nothing extra — we already force dark theme */
-    }
-
-</style>
+    /* Mobile menu */
+    #mobileMenu { transition: max-height .25s ease; }
+    @media (min-width: 768px) { #mobileMenu { display: none !important; } }
+  </style>
 </head>
-<body class="bg-gray-50">
-<!-- Header -->
-<header class="gradient-bg text-white py-4 sticky top-0 z-50 shadow-lg">
-    <div class="container mx-auto px-6 flex justify-between items-center">
-    <div class="text-2xl font-bold">LSGHOST</div>
-    <nav class="hidden md:flex space-x-8">
-        <a href="#home" class="hover:text-yellow-300 transition-colors">Início</a>
-        <a href="#about" class="hover:text-yellow-300 transition-colors">Sobre</a>
-        <a href="#products" class="hover:text-yellow-300 transition-colors">Produtos</a>
-        <a href="#contact" class="hover:text-yellow-300 transition-colors">Contato</a>
-    </nav>
-    <div class="md:hidden">
-        <button id="menuBtn" class="text-white">
+<body class="bg-page antialiased selection:bg-brand-greenBright/30 selection:text-white">
+
+  <!-- Header -->
+  <header class="gradient-bg top-nav-blur text-white sticky top-0 z-50 shadow-neon-sm">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center py-3">
+      <a href="#home" class="text-2xl font-bold tracking-tight hover:opacity-95" aria-label="LSGHOST Início">
+        <span class="brand-gradient">LSGHOST</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#home" class="text-white/90 hover:text-yellow-300 transition-colors">Início</a>
+        <a href="#about" class="text-white/90 hover:text-yellow-300 transition-colors">Sobre</a>
+        <a href="#products" class="text-white/90 hover:text-yellow-300 transition-colors">Produtos</a>
+        <a href="#contact" class="text-white/90 hover:text-yellow-300 transition-colors">Contato</a>
+      </nav>
+      <button id="menuBtn" aria-label="Abrir menu" class="md:hidden text-white focus:outline-none">
         <i class="fas fa-bars text-xl"></i>
-        </button>
-    </div>
+      </button>
     </div>
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden bg-purple-800 py-4">
-    <div class="container mx-auto px-6 flex flex-col space-y-4">
-        <a href="#home" class="hover:text-yellow-300 transition-colors">Início</a>
-        <a href="#about" class="hover:text-yellow-300 transition-colors">Sobre</a>
-        <a href="#products" class="hover:text-yellow-300 transition-colors">Produtos</a>
-        <a href="#contact" class="hover:text-yellow-300 transition-colors">Contato</a>
+    <div id="mobileMenu" class="md:hidden glass overflow-hidden">
+      <nav class="px-6 py-4 flex flex-col gap-4">
+        <a href="#home" class="text-white/90 hover:text-yellow-300 transition-colors">Início</a>
+        <a href="#about" class="text-white/90 hover:text-yellow-300 transition-colors">Sobre</a>
+        <a href="#products" class="text-white/90 hover:text-yellow-300 transition-colors">Produtos</a>
+        <a href="#contact" class="text-white/90 hover:text-yellow-300 transition-colors">Contato</a>
+      </nav>
     </div>
-    </div>
-</header>
+  </header>
 
-<!-- Hero Section -->
-<section id="home" class="gradient-bg text-white py-20">
-    <div class="container mx-auto px-6 text-center">
-    <div class="floating mb-8">
-        <div class="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center text-purple-600 text-6xl font-bold shadow-2xl">
-        LS
-        </div>
-    </div>
-    <h1 class="text-5xl md:text-7xl font-bold mb-6">LSGHOST</h1>
-    <h2 class="text-2xl md:text-3xl font-light mb-8">Lucas Simioni</h2>
-    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Especialista em Produtos Digitais & Empreendedorismo Online</p>
-    <div class="pulse-animation inline-block bg-orange-400 text-green-800 px-8 py-4 rounded-full font-bold text-lg mb-8">
-        💰 Mais de R$ 5.000 em Vendas Digitais
-    </div>
-    <div class="flex justify-center space-x-6">
-        <!-- KEEP these buttons colors as in original so brand look remains -->
-        <a href="https://www.youtube.com/@LSGHOST_1" target="_blank" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-full transition-colors">
-        <i class="fab fa-youtube mr-2"></i>YouTube
-        </a>
-        <a href="https://www.instagram.com/lsghost_1/" target="_blank" class="bg-pink-600 hover:bg-pink-700 px-6 py-3 rounded-full transition-colors">
-        <i class="fab fa-instagram mr-2"></i>Instagram
-        </a>
-    </div>
-    </div>
-</section>
+  <main>
 
-<!-- About Section -->
-<section id="about" class="py-20 bg-white">
-    <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-800 mb-6">Sobre Mim</h2>
-        <div class="w-24 h-1 bg-green-600 mx-auto mb-8"></div>
-    </div>
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-        <h3 class="text-2xl font-bold text-gray-800 mb-6">Transformando Vidas Através do Empreendedorismo Digital</h3>
-        <p class="text-gray-600 mb-6 leading-relaxed">
-            Sou Lucas Simioni, conhecido como LSGHOST, e minha missão é ajudar pessoas a conquistarem sua independência financeira através do mundo digital. Com mais de R$ 5.000 em vendas comprovadas, desenvolvi métodos únicos e eficazes para quem quer começar ou expandir seus negócios online.
-        </p>
-        <div class="grid grid-cols-2 gap-6">
-            <div class="text-center p-4 bg-green-50 rounded-lg">
-            <div class="text-3xl font-bold text-green-600">5K+</div>
-            <div class="text-gray-600">Em Vendas</div>
+    <!-- Hero -->
+    <section id="home" class="gradient-bg text-white py-20 md:py-28">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="order-2 md:order-1">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-6">
+              <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              Especialista em Produtos Digitais
             </div>
-            <div class="text-center p-4 bg-green-50 rounded-lg">
-            <div class="text-3xl font-bold text-green-600">12</div>
-            <div class="text-gray-600">Produtos</div>
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4">
+              <span class="block">Olá, eu sou</span>
+              <span class="brand-gradient">Lucas Simioni</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white/85 mb-8 max-w-xl">
+              Transformando vidas através de produtos digitais, conteúdo prático e estratégias que geram resultados.
+            </p>
+            <div class="flex flex-wrap gap-4 items-center mb-10">
+              <a href="#products" class="btn-cta inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold cta-glow">
+                Ver Produtos <i class="fas fa-arrow-down"></i>
+              </a>
+              <a href="https://www.youtube.com/@LSGHOST_1" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold bg-red-600 hover:bg-red-700 transition-colors">
+                <i class="fab fa-youtube"></i> YouTube
+              </a>
+              <a href="https://www.instagram.com/lsghost_1/" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold bg-pink-600 hover:bg-pink-700 transition-colors">
+                <i class="fab fa-instagram"></i> Instagram
+              </a>
             </div>
-        </div>
-        </div>
-        <div class="text-center">
-        <div class="w-64 h-64 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white text-8xl font-bold shadow-2xl">
-            🚀
-        </div>
-        </div>
-    </div>
-    </div>
-</section>
-
-<!-- Why Choose Section -->
-<section class="py-20 bg-gradient-to-r from-green-600 to-orange-500 text-white">
-    <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold mb-6">Por Que Escolher Meus Produtos?</h2>
-        <div class="w-24 h-1 bg-orange-400 mx-auto mb-8"></div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm">
-        <div class="w-20 h-20 mx-auto bg-orange-400 rounded-full flex items-center justify-center text-3xl mb-4">⚡</div>
-        <h3 class="text-xl font-bold mb-4">Resultados Rápidos</h3>
-        <p class="text-green-100">Métodos testados que já geraram mais de R$ 5.000 em vendas comprovadas</p>
-        </div>
-        <div class="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm">
-        <div class="w-20 h-20 mx-auto bg-orange-400 rounded-full flex items-center justify-center text-3xl mb-4">💎</div>
-        <h3 class="text-xl font-bold mb-4">Conteúdo Premium</h3>
-        <p class="text-green-100">Informações exclusivas e estratégias que realmente funcionam no mercado atual</p>
-        </div>
-        <div class="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm">
-        <div class="w-20 h-20 mx-auto bg-orange-400 rounded-full flex items-center justify-center text-3xl mb-4">🎯</div>
-        <h3 class="text-xl font-bold mb-4">Foco na Prática</h3>
-        <p class="text-green-100">Sem enrolação! Direto ao ponto com ações práticas que você pode aplicar hoje</p>
-        </div>
-    </div>
-
-    <div class="text-center mt-12">
-        <div class="inline-block bg-orange-400 text-green-800 px-8 py-4 rounded-full font-bold text-lg">
-        🔥 Mais de 1000+ pessoas já transformaram suas vidas!
-        </div>
-    </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="py-20 bg-white">
-    <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-800 mb-6">O Que Dizem Sobre Meus Produtos</h2>
-        <div class="w-24 h-1 bg-green-600 mx-auto mb-8"></div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-green-50 p-6 rounded-xl shadow-lg">
-        <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold mr-4">M</div>
-            <div>
-            <h4 class="font-bold text-gray-800">Maria Silva</h4>
-            <div class="text-orange-500">⭐⭐⭐⭐⭐</div>
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                <i class="fa-solid fa-bolt text-green-300 text-2xl"></i>
+              </div>
+              <div class="text-white/90">
+                <div class="text-sm text-muted">Vendas comprovadas</div>
+                <div class="text-2xl font-bold"><span class="brand-gradient">R$ 5.000+</span></div>
+              </div>
             </div>
-        </div>
-        <p class="text-gray-600 italic">"Consegui meus primeiros R$ 500 online em apenas 2 semanas seguindo as estratégias do Lucas!"</p>
-        </div>
-
-        <div class="bg-orange-50 p-6 rounded-xl shadow-lg">
-        <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-4">J</div>
-            <div>
-            <h4 class="font-bold text-gray-800">João Santos</h4>
-            <div class="text-orange-500">⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="order-1 md:order-2 flex justify-center">
+            <div class="float relative">
+              <div class="w-40 h-40 md:w-56 md:h-56 rounded-full glass flex items-center justify-center shadow-neon-lg ring-1 ring-white/10">
+                <div class="text-5xl md:text-7xl font-extrabold brand-gradient">LS</div>
+              </div>
+              <div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-green-400/20 border border-green-400/40 grid place-items-center spin-slow">
+                <i class="fa-solid fa-star text-brand-greenBright"></i>
+              </div>
+              <div class="absolute -bottom-6 -left-6 w-16 h-16 rounded-full bg-green-400/20 border border-green-400/40 grid place-items-center spin-slow">
+                <i class="fa-solid fa-rocket text-brand-greenBright"></i>
+              </div>
             </div>
+          </div>
         </div>
-        <p class="text-gray-600 italic">"O PACK +1000 VÍDEOS mudou minha vida! Agora trabalho de casa e ganho mais que no emprego."</p>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20 bg-panel">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">Sobre Mim</h2>
+          <div class="divider"></div>
+          <p class="text-muted text-lg max-w-2xl mx-auto">Ajudando pessoas a conquistarem independência financeira através do empreendedorismo digital.</p>
         </div>
 
-        <div class="bg-green-50 p-6 rounded-xl shadow-lg">
-        <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold mr-4">A</div>
-            <div>
-            <h4 class="font-bold text-gray-800">Ana Costa</h4>
-            <div class="text-orange-500">⭐⭐⭐⭐⭐</div>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 class="text-2xl font-bold text-white mb-6">Transformando Vidas Através do Empreendedorismo Digital</h3>
+            <p class="text-muted mb-6 leading-relaxed">
+              Sou Lucas Simioni, conhecido como LSGHOST, e minha missão é ajudar pessoas a conquistarem sua independência financeira através do mundo digital. Com mais de R$ 5.000 em vendas comprovadas, desenvolvi métodos únicos e eficazes para quem quer começar ou expandir seus negócios online.
+            </p>
+            <div class="grid grid-cols-2 gap-6 mb-6">
+              <div class="glass p-6 rounded-xl text-center">
+                <div class="text-3xl font-bold brand-gradient mb-2">5K+</div>
+                <div class="text-muted">Em Vendas</div>
+              </div>
+              <div class="glass p-6 rounded-xl text-center">
+                <div class="text-3xl font-bold brand-gradient mb-2">12</div>
+                <div class="text-muted">Produtos</div>
+              </div>
             </div>
+          </div>
+          <div class="text-center">
+            <div class="w-64 h-64 mx-auto bg-gradient-to-br from-brand-greenBright to-brand-greenDeep rounded-full flex items-center justify-center text-white text-8xl font-bold shadow-neon-lg">
+              🚀
+            </div>
+          </div>
         </div>
-        <p class="text-gray-600 italic">"Conteúdo direto e sem enrolação. Recomendo para quem quer resultados reais!"</p>
-        </div>
-    </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Products Section -->
-<section id="products" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-800 mb-6">Meus Produtos Digitais</h2>
-        <div class="w-24 h-1 bg-green-600 mx-auto mb-8"></div>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Produtos testados e aprovados que já geraram mais de R$ 5.000 em vendas</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <!-- DESTAQUE: PACK +1000 VÍDEOS -->
-        <div class="bg-gradient-to-br from-yellow-100 to-orange-200 rounded-2xl shadow-2xl card-hover p-8 border-4 border-red-500 relative md:col-span-2 lg:col-span-3 animate-pulse-slow">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-bold">
-            🔥 MELHOR PRODUTO
-        </div>
-        <div class="text-center mt-4">
-            <div class="w-20 h-20 mx-auto bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-3xl mb-4 animate-spin-slow">⚡</div>
-            <h3 class="text-2xl font-extrabold text-gray-900 mb-4 drop-shadow">PACK +1000 VÍDEOS</h3>
-            <div class="text-3xl font-extrabold text-green-600 mb-6">R$ 17,97</div>
-            <a href="https://pay.kirvano.com/bca9009c-9bd9-466a-b86e-d286806bf064" target="_blank"
-            class="block w-full bg-gradient-to-r from-green-600 to-blue-600 hover:opacity-90 text-white text-center py-4 rounded-lg font-bold text-lg transition-all shadow-xl">
-            Comprar Agora 🚀
-            </a>
-        </div>
+    <!-- Why Choose -->
+    <section class="py-20 gradient-bg text-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Por Que Escolher Meus Produtos?</h2>
+          <div class="divider"></div>
         </div>
 
-        <!-- Product 1 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="glass p-8 rounded-xl text-center">
+            <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-3xl mb-6">
+              ⚡
+            </div>
+            <h3 class="text-xl font-bold mb-4">Resultados Rápidos</h3>
+            <p class="text-white/90">Métodos testados que já geraram mais de R$ 5.000 em vendas comprovadas</p>
+          </div>
+          <div class="glass p-8 rounded-xl text-center">
+            <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-3xl mb-6">
+              💎
+            </div>
+            <h3 class="text-xl font-bold mb-4">Conteúdo Premium</h3>
+            <p class="text-white/90">Informações exclusivas e estratégias que realmente funcionam no mercado atual</p>
+          </div>
+          <div class="glass p-8 rounded-xl text-center">
+            <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-3xl mb-6">
+              🎯
+            </div>
+            <h3 class="text-xl font-bold mb-4">Foco na Prática</h3>
+            <p class="text-white/90">Sem enrolação! Direto ao ponto com ações práticas que você pode aplicar hoje</p>
+          </div>
+        </div>
+
         <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center text-green-600 text-2xl mb-4">💰</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como Ganhar Dinheiro Online de Forma Inteligente</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 14,97</div>
-            <a href="https://pay.kirvano.com/9dc71c48-d963-4c2a-a36f-e9e1aef16521" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
+          <div class="inline-block bg-brand-greenBright text-black px-8 py-4 rounded-full font-bold text-lg">
+            🔥 Mais de 1000+ pessoas já transformaram suas vidas!
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-panel">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">O Que Dizem Sobre Meus Produtos</h2>
+          <div class="divider"></div>
         </div>
 
-        <!-- Product 2 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mb-4">📚</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como vender produtos digitais (eBooks, cursos e mais)</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 14,97</div>
-            <a href="https://pay.kirvano.com/35a349ed-19b4-455e-a2c6-368a770ce9ab" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="glass p-6 rounded-xl">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-brand-greenBright rounded-full flex items-center justify-center text-black font-bold mr-4">
+                M
+              </div>
+              <div>
+                <h4 class="font-bold text-white">Maria Silva</h4>
+                <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
+              </div>
+            </div>
+            <p class="text-muted italic">"Consegui meus primeiros R$ 500 online em apenas 2 semanas seguindo as estratégias do Lucas!"</p>
+          </div>
+
+          <div class="glass p-6 rounded-xl">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                J
+              </div>
+              <div>
+                <h4 class="font-bold text-white">João Santos</h4>
+                <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
+              </div>
+            </div>
+            <p class="text-muted italic">"O PACK +1000 VÍDEOS mudou minha vida! Agora trabalho de casa e ganho mais que no emprego."</p>
+          </div>
+
+          <div class="glass p-6 rounded-xl">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-brand-greenBright rounded-full flex items-center justify-center text-black font-bold mr-4">
+                A
+              </div>
+              <div>
+                <h4 class="font-bold text-white">Ana Costa</h4>
+                <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
+              </div>
+            </div>
+            <p class="text-muted italic">"Conteúdo direto e sem enrolação. Recomendo para quem quer resultados reais!"</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-20 gradient-bg">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">Meus Produtos Digitais</h2>
+          <div class="divider"></div>
+          <p class="text-xl text-white/90 max-w-2xl mx-auto">Produtos testados e aprovados que já geraram mais de R$ 5.000 em vendas</p>
         </div>
 
-        <!-- Product 3 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-red-100 rounded-full flex items-center justify-center text-red-600 text-2xl mb-4">📱</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como viver de conteúdo (YouTube, TikTok, Instagram)</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 14,97</div>
-            <a href="https://pay.kirvano.com/886289d3-9d2a-4a76-9b4f-a6c62d22d571" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
-        </div>
-        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Product 4 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-2xl mb-4">🤖</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como aprender Inteligência Artificial do zero</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 14,97</div>
-            <a href="https://pay.kirvano.com/d1f61f1b-dabd-42b2-96e1-e91d03f8f0a9" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- DESTAQUE: PACK +1000 VÍDEOS -->
+          <div class="glass p-8 rounded-2xl shadow-neon-lg card-hover md:col-span-2 lg:col-span-3 pulse-slow relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+              🔥 MELHOR PRODUTO
+            </div>
+            <div class="text-center mt-4">
+              <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-brand-greenBright text-3xl mb-6 spin-slow">
+                ⚡
+              </div>
+              <h3 class="text-3xl font-extrabold text-white mb-6 drop-shadow">PACK +1000 VÍDEOS</h3>
+              <div class="text-4xl font-extrabold brand-gradient mb-6">R$ 17,97</div>
+              <a href="https://pay.kirvano.com/bca9009c-9bd9-466a-b86e-d286806bf064" target="_blank"
+                class="inline-block w-full btn-cta text-center py-4 rounded-lg font-bold text-lg transition-all shadow-neon-md">
+                Comprar Agora 🚀
+              </a>
+            </div>
+          </div>
 
-        <!-- Product 5 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-2xl mb-4">🏢</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como criar um negócio com pouco dinheiro</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 14,97</div>
-            <a href="https://pay.kirvano.com/9106f71a-4187-4c4f-9beb-0369dda390b9" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- Product 1 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-brand-greenBright text-2xl mb-6">
+                💰
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como Ganhar Dinheiro Online de Forma Inteligente</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
+              <a href="https://pay.kirvano.com/9dc71c48-d963-4c2a-a36f-e9e1aef16521" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-        <!-- Product 6 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-2xl mb-4">🏠</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como trabalhar de casa e ser autônomo</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 14,97</div>
-            <a href="https://pay.kirvano.com/ece6f5c8-09af-4491-8563-7a3b75b9b711" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- Product 2 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-blue-400/20 rounded-full flex items-center justify-center text-blue-400 text-2xl mb-6">
+                📚
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como vender produtos digitais (eBooks, cursos e mais)</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
+              <a href="https://pay.kirvano.com/35a349ed-19b4-455e-a2c6-368a770ce9ab" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-        <!-- Product 7 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-teal-100 rounded-full flex items-center justify-center text-teal-600 text-2xl mb-4">🤝</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como fazer uma renda mensal com afiliados ou freelas</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 14,97</div>
-            <a href="https://pay.kirvano.com/f36921c7-a85f-4556-8a73-1a100b9a5148" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- Product 3 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-red-400/20 rounded-full flex items-center justify-center text-red-400 text-2xl mb-6">
+                📱
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como viver de conteúdo (YouTube, TikTok, Instagram)</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
+              <a href="https://pay.kirvano.com/886289d3-9d2a-4a76-9b4f-a6c62d22d571" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-        <!-- Product 8 (Premium) -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6 border-4 border-red-400 relative">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-400 text-white px-4 py-1 rounded-full text-sm font-bold">PREMIUM</div>
-        <div class="text-center mt-4">
-            <div class="w-16 h-16 mx-auto bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-2xl mb-4">⚡</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como ganhar dinheiro fácil (Ebook COMPLETO)</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 134,97</div>
-            <a href="https://pay.kirvano.com/b1a29179-636e-4610-8537-c58aa2055166" target="_blank" class="block w-full bg-gradient-to-r from-red-600 to-orange-600 hover:opacity-90 text-white text-center py-3 rounded-lg font-semibold transition-all">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- Product 4 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-purple-400/20 rounded-full flex items-center justify-center text-purple-400 text-2xl mb-6">
+                🤖
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como aprender Inteligência Artificial do zero</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
+              <a href="https://pay.kirvano.com/d1f61f1b-dabd-42b2-96e1-e91d03f8f0a9" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-        <!-- Product 9 (Mais vendido) -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6 border-4 border-orange-400 relative">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-400 text-black px-4 py-1 rounded-full text-sm font-bold">MAIS VENDIDO</div>
-        <div class="text-center mt-4">
-            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-green-100 to-orange-100 rounded-full flex items-center justify-center text-green-600 text-2xl mb-4">🎬</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">PAC 284 VÍDEOS</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 9,90</div>
-            <a href="https://pay.kirvano.com/d7b27568-3ad1-4ec6-b1d1-dfe3e349a426" target="_blank" class="block w-full bg-gradient-to-r from-green-600 to-orange-600 hover:opacity-90 text-white text-center py-3 rounded-lg font-semibold transition-all">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- Product 5 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-yellow-400/20 rounded-full flex items-center justify-center text-yellow-400 text-2xl mb-6">
+                🏢
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como criar um negócio com pouco dinheiro</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
+              <a href="https://pay.kirvano.com/9106f71a-4187-4c4f-9beb-0369dda390b9" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-        <!-- Product 10 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-pink-100 rounded-full flex items-center justify-center text-pink-600 text-2xl mb-4">📅</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Planner de Conteúdo para Redes Sociais – 2025</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 9,87</div>
-            <a href="https://pay.kirvano.com/37ff57df-1178-43c0-96ad-1dfffb73ef8c" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- Product 6 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-indigo-400/20 rounded-full flex items-center justify-center text-indigo-400 text-2xl mb-6">
+                🏠
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como trabalhar de casa e ser autônomo</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
+              <a href="https://pay.kirvano.com/ece6f5c8-09af-4491-8563-7a3b75b9b711" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-        <!-- Product 11 -->
-        <div class="bg-white rounded-xl shadow-lg card-hover p-6">
-        <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-cyan-100 rounded-full flex items-center justify-center text-cyan-600 text-2xl mb-4">🔥</div>
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Como Fazer Dinheiro com Conteúdos Virais e Memes</h3>
-            <div class="text-2xl font-bold text-green-600 mb-6">R$ 10,97</div>
-            <a href="https://pay.kirvano.com/8f714525-c3dc-40f0-b62a-3375013d2479" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-lg font-semibold transition-colors">Comprar Agora</a>
-        </div>
-        </div>
+          <!-- Product 7 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-teal-400/20 rounded-full flex items-center justify-center text-teal-400 text-2xl mb-6">
+                🤝
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como fazer uma renda mensal com afiliados ou freelas</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
+              <a href="https://pay.kirvano.com/f36921c7-a85f-4556-8a73-1a100b9a5148" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-    </div>
-    </div>
-</section>
+          <!-- Product 8 (Premium) -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 border border-red-400 relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-400 text-white px-4 py-1 rounded-full text-sm font-bold">
+              PREMIUM
+            </div>
+            <div class="text-center mt-4">
+              <div class="w-16 h-16 mx-auto bg-orange-400/20 rounded-full flex items-center justify-center text-orange-400 text-2xl mb-6">
+                ⚡
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como ganhar dinheiro fácil (Ebook COMPLETO)</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 134,97</div>
+              <a href="https://pay.kirvano.com/b1a29179-636e-4610-8537-c58aa2055166" target="_blank" 
+                class="block w-full bg-gradient-to-r from-red-600 to-orange-600 hover:opacity-90 text-white text-center py-3 rounded-lg font-semibold transition-all">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
 
-<!-- Guarantee Section -->
-<section class="py-20 bg-orange-500 text-white">
-    <div class="container mx-auto px-6 text-center">
-    <div class="max-w-4xl mx-auto">
-        <div class="w-24 h-24 mx-auto bg-white rounded-full flex items-center justify-center text-orange-500 text-4xl mb-8">🛡️</div>
-        <h2 class="text-4xl font-bold mb-6">Garantia de Satisfação</h2>
-        <p class="text-xl mb-8">Estou tão confiante na qualidade dos meus produtos que ofereço:</p>
+          <!-- Product 9 (Mais vendido) -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 border border-orange-400 relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-400 text-black px-4 py-1 rounded-full text-sm font-bold">
+              MAIS VENDIDO
+            </div>
+            <div class="text-center mt-4">
+              <div class="w-16 h-16 mx-auto bg-gradient-to-r from-brand-greenBright/20 to-orange-400/20 rounded-full flex items-center justify-center text-brand-greenBright text-2xl mb-6">
+                🎬
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">PAC 284 VÍDEOS</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 9,90</div>
+              <a href="https://pay.kirvano.com/d7b27568-3ad1-4ec6-b1d1-dfe3e349a426" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-all">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
+
+          <!-- Product 10 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-pink-400/20 rounded-full flex items-center justify-center text-pink-400 text-2xl mb-6">
+                📅
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Planner de Conteúdo para Redes Sociais – 2025</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 9,87</div>
+              <a href="https://pay.kirvano.com/37ff57df-1178-43c0-96ad-1dfffb73ef8c" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
+
+          <!-- Product 11 -->
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+            <div class="text-center">
+              <div class="w-16 h-16 mx-auto bg-cyan-400/20 rounded-full flex items-center justify-center text-cyan-400 text-2xl mb-6">
+                🔥
+              </div>
+              <h3 class="text-xl font-bold text-white mb-4">Como Fazer Dinheiro com Conteúdos Virais e Memes</h3>
+              <div class="text-2xl font-bold brand-gradient mb-6">R$ 10,97</div>
+              <a href="https://pay.kirvano.com/8f714525-c3dc-40f0-b62a-3375013d2479" target="_blank" 
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                Comprar Agora
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Guarantee -->
+    <section class="py-20 bg-panel">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="w-24 h-24 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-brand-greenBright text-4xl mb-8">
+          🛡️
+        </div>
+        <h2 class="text-4xl font-bold text-white mb-6">Garantia de Satisfação</h2>
+        <p class="text-xl text-muted mb-8">Estou tão confiante na qualidade dos meus produtos que ofereço:</p>
 
         <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <div class="bg-white bg-opacity-10 p-6 rounded-xl">
-            <div class="text-3xl mb-4">✅</div>
-            <h3 class="text-xl font-bold mb-2">Conteúdo de Qualidade</h3>
-            <p>Informações práticas e atualizadas que realmente funcionam no mercado atual</p>
+          <div class="glass p-6 rounded-xl">
+            <div class="text-4xl mb-4">✅</div>
+            <h3 class="text-xl font-bold mb-2 text-white">Conteúdo de Qualidade</h3>
+            <p class="text-muted">Informações práticas e atualizadas que realmente funcionam no mercado atual</p>
+          </div>
+          <div class="glass p-6 rounded-xl">
+            <div class="text-4xl mb-4">🚀</div>
+            <h3 class="text-xl font-bold mb-2 text-white">Resultados Comprovados</h3>
+            <p class="text-muted">Mais de R$ 5.000 em vendas usando exatamente essas estratégias</p>
+          </div>
         </div>
-        <div class="bg-white bg-opacity-10 p-6 rounded-xl">
-            <div class="text-3xl mb-4">🚀</div>
-            <h3 class="text-xl font-bold mb-2">Resultados Comprovados</h3>
-            <p>Mais de R$ 5.000 em vendas usando exatamente essas estratégias</p>
+
+        <div class="glass p-8 rounded-xl">
+          <h3 class="text-2xl font-bold mb-4 text-white">💰 Invista em Você Hoje!</h3>
+          <p class="text-lg text-muted">Cada dia que você adia é um dia a menos para começar a ganhar dinheiro online. Comece agora!</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 gradient-bg text-white">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-6">Vamos Conectar?</h2>
+        <div class="divider mb-8"></div>
+        <p class="text-xl mb-12 max-w-2xl mx-auto">Siga-me nas redes sociais para conteúdo exclusivo sobre empreendedorismo digital</p>
+
+        <div class="flex justify-center space-x-8 mb-12">
+          <!-- Keep brand button colors as original -->
+          <a href="https://www.youtube.com/@LSGHOST_1" target="_blank" 
+             class="bg-red-600 hover:bg-red-700 p-6 rounded-full transition-all transform hover:scale-110 shadow-neon-sm">
+            <i class="fab fa-youtube text-3xl"></i>
+          </a>
+          <a href="https://www.instagram.com/lsghost_1/" target="_blank" 
+             class="bg-pink-600 hover:bg-pink-700 p-6 rounded-full transition-all transform hover:scale-110 shadow-neon-sm">
+            <i class="fab fa-instagram text-3xl"></i>
+          </a>
         </div>
 
-        <div class="bg-green-600 p-8 rounded-xl">
-        <h3 class="text-2xl font-bold mb-4">💰 Invista em Você Hoje!</h3>
-        <p class="text-lg">Cada dia que você adia é um dia a menos para começar a ganhar dinheiro online. Comece agora!</p>
+        <div class="glass rounded-xl p-8 max-w-2xl mx-auto">
+          <h3 class="text-2xl font-bold mb-4">💡 Dica Gratuita</h3>
+          <p class="text-lg text-white/90">O primeiro passo para o sucesso online é começar. Não espere o momento perfeito, comece hoje mesmo com pequenas ações!</p>
         </div>
-    </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Contact Section -->
-<section id="contact" class="py-20 gradient-bg text-white">
-    <div class="container mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-6">Vamos Conectar?</h2>
-    <div class="w-24 h-1 bg-orange-400 mx-auto mb-8"></div>
-    <p class="text-xl mb-12 max-w-2xl mx-auto">Siga-me nas redes sociais para conteúdo exclusivo sobre empreendedorismo digital</p>
+  </main>
 
-    <div class="flex justify-center space-x-8 mb-12">
-        <!-- Keep brand button colors as original -->
-        <a href="https://www.youtube.com/@LSGHOST_1" target="_blank" class="bg-red-600 hover:bg-red-700 p-6 rounded-full transition-all transform hover:scale-110">
-        <i class="fab fa-youtube text-3xl"></i>
-        </a>
-        <a href="https://www.instagram.com/lsghost_1/" target="_blank" class="bg-pink-600 hover:bg-pink-700 p-6 rounded-full transition-all transform hover:scale-110">
-        <i class="fab fa-instagram text-3xl"></i>
-        </a>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-8">
+        <div class="text-3xl font-bold mb-4 brand-gradient">LSGHOST</div>
+        <p class="text-gray-400 mb-2">© 2024 Lucas Simioni. Todos os direitos reservados.</p>
+        <p class="text-gray-500">Transformando vidas através do empreendedorismo digital</p>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <nav class="flex flex-wrap justify-center gap-6">
+            <a href="#home" class="text-gray-400 hover:text-brand-greenBright transition-colors">Início</a>
+            <a href="#about" class="text-gray-400 hover:text-brand-greenBright transition-colors">Sobre</a>
+            <a href="#products" class="text-gray-400 hover:text-brand-greenBright transition-colors">Produtos</a>
+            <a href="#contact" class="text-gray-400 hover:text-brand-greenBright transition-colors">Contato</a>
+          </nav>
+          
+          <div class="flex items-center gap-4">
+            <a href="https://www.youtube.com/@LSGHOST_1" target="_blank" 
+               class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center transition-colors">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com/lsghost_1/" target="_blank" 
+               class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-colors">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+  </footer>
 
-    <div class="bg-white bg-opacity-10 rounded-xl p-8 max-w-2xl mx-auto">
-        <h3 class="text-2xl font-bold mb-4">💡 Dica Gratuita</h3>
-        <p class="text-lg">O primeiro passo para o sucesso online é começar. Não espere o momento perfeito, comece hoje mesmo com pequenas ações!</p>
-    </div>
-    </div>
-</section>
+  <!-- Back to Top Button -->
+  <button id="toTop" aria-label="Voltar ao topo">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-8">
-    <div class="container mx-auto px-6 text-center">
-    <div class="text-2xl font-bold mb-4">LSGHOST</div>
-    <p class="text-gray-400 mb-4">© 2024 Lucas Simioni. Todos os direitos reservados.</p>
-    <p class="text-gray-400">Transformando vidas através do empreendedorismo digital</p>
-    </div>
-</footer>
-
-<script>
+  <!-- Scripts -->
+  <script>
     // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    const toTop = document.getElementById('toTop');
 
-    // Smooth scrolling
+    menuBtn.addEventListener('click', () => {
+      const isVisible = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px';
+      if (isVisible) {
+        mobileMenu.style.maxHeight = '0px';
+      } else {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      }
+    });
+
+    // Close mobile menu when clicking on a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.maxHeight = '0px';
+      });
+    });
+
+    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-        const href = anchor.getAttribute('href');
-        if (!href || href === '#') return;
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
         e.preventDefault();
         const target = document.querySelector(href);
         if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        mobileMenu.classList.add('hidden');
+          const headerHeight = 80;
+          const targetPosition = target.offsetTop - headerHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
         }
+      });
     });
+
+    // Back to top functionality
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        toTop.classList.add('visible');
+      } else {
+        toTop.classList.remove('visible');
+      }
+    });
+
+    toTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
 
     // Header opacity on scroll
-    window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
-    if (window.scrollY > 100) header.classList.add('bg-opacity-95');
-    else header.classList.remove('bg-opacity-95');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.style.background = 'linear-gradient(180deg, rgba(7,16,25,0.95), rgba(7,16,25,0.85))';
+      } else {
+        header.style.background = 'radial-gradient(1200px 500px at 10% 10%, rgba(0,255,119,0.10), transparent 40%), radial-gradient(1000px 500px at 90% 10%, rgba(0,179,107,0.08), transparent 45%), radial-gradient(1000px 500px at 50% 100%, rgba(0,255,119,0.06), transparent 35%), linear-gradient(180deg, rgba(0,255,119,0.04), rgba(0,179,107,0.02))';
+      }
     });
-</script>
 
-<!-- (Opcional/Original) Script do Cloudflare que estava no seu código -->
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97310b30d1c2830f',t:'MTc1NTg1MTc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for fade-in animation
+    document.querySelectorAll('.glass, .card-hover').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        mobileMenu.style.maxHeight = '0px';
+      }
+    });
+
+    // Focus management for mobile menu
+    menuBtn.addEventListener('click', () => {
+      setTimeout(() => {
+        if (mobileMenu.style.maxHeight !== '0px') {
+          const firstLink = mobileMenu.querySelector('a');
+          if (firstLink) firstLink.focus();
+        }
+      }, 100);
+    });
+  </script>
+
+  <!-- Cloudflare Challenge (Opcional) -->
+  <script>
+    (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97310b30d1c2830f',t:'MTc1NTg1MTc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+  </script>
+
 </body>
 </html>
