@@ -35,6 +35,12 @@
             'neon-sm': '0 10px 30px rgba(0,179,107,0.06)',
             'neon-md': '0 10px 40px rgba(0,179,107,0.10)',
             'neon-lg': '0 30px 60px rgba(0,0,0,0.60)'
+          },
+          animation: {
+            'bounce-slow': 'bounce 2s infinite',
+            'pulse-fast': 'pulse 1s infinite',
+            'spin-slow': 'spin 3s linear infinite',
+            'float': 'float 3s ease-in-out infinite',
           }
         }
       }
@@ -49,8 +55,201 @@
       --page-dark:    #000000;
       --muted:        #94b8a9;
     }
-    body { font-family: 'Inter', sans-serif; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      overflow-x: hidden;
+    }
 
+    /* ANIMAÇÕES PRINCIPAIS */
+    .card-hover { 
+      transition: all 0.4s cubic-bezier(.2,.9,.2,1);
+    }
+    .card-hover:hover { 
+      transform: translateY(-12px) scale(1.02); 
+      box-shadow: 0 40px 80px rgba(0,0,0,0.70), 0 0 30px rgba(0,255,119,0.15);
+    }
+
+    .float { animation: float 3.2s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+
+    .spin-slow { animation: spin-slow 6s linear infinite; }
+    @keyframes spin-slow { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+    .pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+    @keyframes pulse-slow { 0%,100%{transform:scale(1.02)} 50%{transform:scale(1.08)} }
+
+    .brand-gradient {
+      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 6px 20px rgba(0,255,119,0.12));
+      animation: shimmer 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes shimmer {
+      0% { filter: drop-shadow(0 6px 20px rgba(0,255,119,0.12)); }
+      100% { filter: drop-shadow(0 6px 30px rgba(0,255,119,0.25)); }
+    }
+
+    /* BOTÃO VOADOR PRINCIPAL */
+    .flying-element {
+      position: absolute;
+      animation: orbit 3s linear infinite;
+      z-index: 10;
+    }
+    
+    @keyframes orbit {
+      0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+    }
+
+    /* PARTÍCULAS FLUTUANTES */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--green-bright);
+      border-radius: 50%;
+      animation: floatParticle 6s ease-in-out infinite;
+    }
+    
+    @keyframes floatParticle {
+      0%, 100% { 
+        transform: translateY(0px) scale(1);
+        opacity: 0;
+      }
+      50% { 
+        transform: translateY(-20px) scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* ANIMAÇÃO DE ENTRADA */
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ELEMENTOS VOADORES */
+    .flying-coin {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(45deg, var(--green-deep), var(--green-bright));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      animation: coinOrbit 4s linear infinite;
+      box-shadow: 0 0 20px rgba(0,255,119,0.5);
+    }
+    
+    @keyframes coinOrbit {
+      0% { 
+        transform: rotate(0deg) translateX(120px) rotate(0deg);
+      }
+      100% { 
+        transform: rotate(360deg) translateX(120px) rotate(-360deg);
+      }
+    }
+
+    .flying-star {
+      position: absolute;
+      animation: starOrbit 3.5s linear infinite;
+    }
+    
+    @keyframes starOrbit {
+      0% { 
+        transform: rotate(0deg) translateX(80px) rotate(0deg);
+      }
+      100% { 
+        transform: rotate(360deg) translateX(80px) rotate(-360deg);
+      }
+    }
+
+    /* EFEITO BRILHO */
+    .glow-effect {
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { text-shadow: 0 0 5px var(--green-bright), 0 0 10px var(--green-bright), 0 0 15px var(--green-bright); }
+      to { text-shadow: 0 0 10px var(--green-bright), 0 0 20px var(--green-bright), 0 0 30px var(--green-bright); }
+    }
+
+    /* DIVISOR ANIMADO */
+    .divider {
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
+      border-radius: 3px;
+      width: 100px;
+      margin: 0 auto;
+      animation: dividerGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes dividerGlow {
+      0% { box-shadow: 0 0 5px rgba(0,255,119,0.3); }
+      100% { box-shadow: 0 0 15px rgba(0,255,119,0.6), 0 0 25px rgba(0,255,119,0.3); }
+    }
+
+    /* BOTÕES ANIMADOS */
+    .btn-cta {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn-cta:hover::before {
+      left: 100%;
+    }
+
+    /* EFEITO ONDULAÇÃO */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ripple::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(0,255,119,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .ripple:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* GRADIENTO DE FUNDO */
     .gradient-bg {
       background: radial-gradient(1200px 500px at 10% 10%, rgba(0,255,119,0.10), transparent 40%),
                   radial-gradient(1000px 500px at 90% 10%, rgba(0,179,107,0.08), transparent 45%),
@@ -60,53 +259,11 @@
       box-shadow: 0 8px 30px rgba(0,179,107,0.06) inset;
     }
 
-    .neon-text { color: var(--green-bright); text-shadow: 0 0 8px rgba(0,255,119,0.30), 0 0 20px rgba(0,179,107,0.18); }
-    .neon-border { border: 1px solid rgba(0,255,119,0.12); box-shadow: 0 10px 30px rgba(0,179,107,0.06); }
-    .neon-panel {
-      background: linear-gradient(180deg, rgba(0,255,119,0.03), rgba(0,179,107,0.02));
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,179,107,0.03);
-    }
-    .cta-glow { box-shadow: 0 6px 24px rgba(0,255,119,0.08), 0 0 26px rgba(0,179,107,0.04); }
-
-    .card-hover { transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s; }
-    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.60); }
-
-    .pulse { animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
-
-    .float { animation: float 3.2s ease-in-out infinite; }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-
-    .spin-slow { animation: spin-slow 6s linear infinite; }
-    @keyframes spin-slow { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-
-    .pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
-    @keyframes pulse-slow { 0%,100%{transform:scale(1.02)} 50%{transform:scale(1.06)} }
-
-    .top-nav-blur { backdrop-filter: blur(10px) saturate(140%); }
-
     .glass {
       background: linear-gradient(180deg, rgba(7,16,25,0.7), rgba(7,16,25,0.45));
       border: 1px solid rgba(0,255,119,0.12);
       box-shadow: 0 10px 30px rgba(0,179,107,0.06);
       backdrop-filter: blur(8px);
-    }
-
-    .brand-gradient {
-      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      filter: drop-shadow(0 6px 20px rgba(0,255,119,0.12));
-    }
-
-    .divider {
-      height: 3px;
-      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
-      border-radius: 3px;
-      width: 100px;
-      margin: 0 auto;
     }
 
     /* Back to top */
@@ -124,54 +281,110 @@
     }
     #toTop.visible { opacity: 1; visibility: visible; }
 
-    /* Dark page baseline */
-    .bg-page { background-color: var(--page-dark); color: #e8fff4; }
-    .bg-panel { background-color: var(--panel-dark); color: #e8fff4; }
-    .text-muted { color: var(--muted); }
-
-    /* Buttons (preserve brand YT/IG colors) */
-    .btn-cta {
-      background: linear-gradient(90deg, var(--green-deep), var(--green-bright));
-      color: #001312;
-      box-shadow: 0 10px 30px rgba(0,179,107,0.12);
-    }
-    .btn-outline {
-      border: 1px solid rgba(0,255,119,0.25);
-      color: var(--green-bright);
-      background: rgba(0,255,119,0.04);
-    }
-    .btn-outline:hover { background: rgba(0,255,119,0.08); }
-
     /* Mobile menu */
-    #mobileMenu { transition: max-height .25s ease; }
-    @media (min-width: 768px) { #mobileMenu { display: none !important; } }
+    #mobileMenu { 
+      transition: all 0.3s ease; 
+      max-height: 0; 
+      overflow: hidden;
+    }
+    
+    @media (min-width: 768px) { 
+      #mobileMenu { display: none !important; } 
+    }
+
+    /* ELEMENTOS ESPECIAIS VOADORES */
+    .multiple-orbit {
+      position: relative;
+    }
+
+    .orbit-item {
+      position: absolute;
+      animation: orbit 4s linear infinite;
+    }
+
+    .orbit-item:nth-child(1) { animation-delay: 0s; }
+    .orbit-item:nth-child(2) { animation-delay: -1s; }
+    .orbit-item:nth-child(3) { animation-delay: -2s; }
+    .orbit-item:nth-child(4) { animation-delay: -3s; }
+
+    @keyframes orbit {
+      0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+    }
+
+    /* TYPING EFFECT */
+    .typing-effect {
+      overflow: hidden;
+      border-right: 2px solid var(--green-bright);
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: var(--green-bright) }
+    }
+
+    /* PULSAÇÃO CONCÊNTRICA */
+    .pulse-ring {
+      position: relative;
+    }
+    
+    .pulse-ring::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--green-bright);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulseRing 2s linear infinite;
+    }
+    
+    @keyframes pulseRing {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
-<body class="bg-page antialiased selection:bg-brand-greenBright/30 selection:text-white">
+<body class="bg-black antialiased selection:bg-green-400/30 selection:text-white">
 
   <!-- Header -->
-  <header class="gradient-bg top-nav-blur text-white sticky top-0 z-50 shadow-neon-sm">
+  <header class="gradient-bg text-white sticky top-0 z-50 shadow-neon-sm">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center py-3">
-      <a href="#home" class="text-2xl font-bold tracking-tight hover:opacity-95" aria-label="LSGHOST Início">
-        <span class="brand-gradient">LSGHOST</span>
+      <a href="#home" class="text-2xl font-bold tracking-tight hover:opacity-95 brand-gradient" aria-label="LSGHOST Início">
+        LSGHOST
       </a>
       <nav class="hidden md:flex items-center gap-8">
-        <a href="#home" class="text-white/90 hover:text-yellow-300 transition-colors">Início</a>
-        <a href="#about" class="text-white/90 hover:text-yellow-300 transition-colors">Sobre</a>
-        <a href="#products" class="text-white/90 hover:text-yellow-300 transition-colors">Produtos</a>
-        <a href="#contact" class="text-white/90 hover:text-yellow-300 transition-colors">Contato</a>
+        <a href="#home" class="text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-110 ripple">Início</a>
+        <a href="#about" class="text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-110 ripple">Sobre</a>
+        <a href="#products" class="text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-110 ripple">Produtos</a>
+        <a href="#contact" class="text-white/90 hover:text-yellow-300 transition-all duration-300 hover:scale-110 ripple">Contato</a>
       </nav>
-      <button id="menuBtn" aria-label="Abrir menu" class="md:hidden text-white focus:outline-none">
+      <button id="menuBtn" aria-label="Abrir menu" class="md:hidden text-white focus:outline-none hover:scale-110 transition-transform">
         <i class="fas fa-bars text-xl"></i>
       </button>
     </div>
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="md:hidden glass overflow-hidden">
       <nav class="px-6 py-4 flex flex-col gap-4">
-        <a href="#home" class="text-white/90 hover:text-yellow-300 transition-colors">Início</a>
-        <a href="#about" class="text-white/90 hover:text-yellow-300 transition-colors">Sobre</a>
-        <a href="#products" class="text-white/90 hover:text-yellow-300 transition-colors">Produtos</a>
-        <a href="#contact" class="text-white/90 hover:text-yellow-300 transition-colors">Contato</a>
+        <a href="#home" class="text-white/90 hover:text-yellow-300 transition-colors fade-in-up">Início</a>
+        <a href="#about" class="text-white/90 hover:text-yellow-300 transition-colors fade-in-up">Sobre</a>
+        <a href="#products" class="text-white/90 hover:text-yellow-300 transition-colors fade-in-up">Produtos</a>
+        <a href="#contact" class="text-white/90 hover:text-yellow-300 transition-colors fade-in-up">Contato</a>
       </nav>
     </div>
   </header>
@@ -179,52 +392,93 @@
   <main>
 
     <!-- Hero -->
-    <section id="home" class="gradient-bg text-white py-20 md:py-28">
-      <div class="max-w-7xl mx-auto px-6">
+    <section id="home" class="gradient-bg text-white py-20 md:py-28 relative">
+      <!-- Partículas flutuantes -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="particle absolute top-1/4 left-1/4" style="animation-delay: 0s;"></div>
+        <div class="particle absolute top-1/3 right-1/3" style="animation-delay: 1s;"></div>
+        <div class="particle absolute bottom-1/4 left-1/3" style="animation-delay: 2s;"></div>
+        <div class="particle absolute top-2/3 right-1/4" style="animation-delay: 3s;"></div>
+        <div class="particle absolute bottom-1/3 right-1/2" style="animation-delay: 4s;"></div>
+        <div class="particle absolute top-1/2 left-1/2" style="animation-delay: 5s;"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
         <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="order-2 md:order-1">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-6">
+          <div class="order-2 md:order-1 fade-in-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-6 pulse">
               <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
               Especialista em Produtos Digitais
             </div>
             <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4">
-              <span class="block">Olá, eu sou</span>
-              <span class="brand-gradient">Lucas Simioni</span>
+              <span class="block typing-effect">Olá, eu sou</span>
+              <span class="brand-gradient glow-effect">Lucas Simioni</span>
             </h1>
-            <p class="text-xl md:text-2xl text-white/85 mb-8 max-w-xl">
+            <p class="text-xl md:text-2xl text-white/85 mb-8 max-w-xl fade-in-up">
               Transformando vidas através de produtos digitais, conteúdo prático e estratégias que geram resultados.
             </p>
-            <div class="flex flex-wrap gap-4 items-center mb-10">
-              <a href="#products" class="btn-cta inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold cta-glow">
+            <div class="flex flex-wrap gap-4 items-center mb-10 relative">
+              <a href="#products" class="btn-cta inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold hover:scale-105 transition-all pulse-ring relative">
                 Ver Produtos <i class="fas fa-arrow-down"></i>
+                
+                <!-- ELEMENTOS VOADORES MÚLTIPLOS -->
+                <div class="absolute -top-4 -right-4 multiple-orbit">
+                  <div class="orbit-item w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                    <i class="fas fa-star text-xs text-yellow-800"></i>
+                  </div>
+                  <div class="orbit-item w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
+                    <i class="fas fa-circle text-xs text-green-800"></i>
+                  </div>
+                  <div class="orbit-item w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center">
+                    <i class="fas fa-heart text-xs text-blue-800"></i>
+                  </div>
+                  <div class="orbit-item w-7 h-7 bg-pink-400 rounded-full flex items-center justify-center">
+                    <i class="fas fa-gem text-xs text-pink-800"></i>
+                  </div>
+                </div>
               </a>
-              <a href="https://www.youtube.com/@LSGHOST_1" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold bg-red-600 hover:bg-red-700 transition-colors">
+              
+              <a href="https://www.youtube.com/@LSGHOST_1" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold bg-red-600 hover:bg-red-700 transition-all hover:scale-105">
                 <i class="fab fa-youtube"></i> YouTube
               </a>
-              <a href="https://www.instagram.com/lsghost_1/" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold bg-pink-600 hover:bg-pink-700 transition-colors">
+              <a href="https://www.instagram.com/lsghost_1/" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-full font-semibold bg-pink-600 hover:bg-pink-700 transition-all hover:scale-105">
                 <i class="fab fa-instagram"></i> Instagram
               </a>
             </div>
-            <div class="flex items-center gap-4">
-              <div class="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+            <div class="flex items-center gap-4 fade-in-up">
+              <div class="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center pulse">
                 <i class="fa-solid fa-bolt text-green-300 text-2xl"></i>
               </div>
               <div class="text-white/90">
-                <div class="text-sm text-muted">Vendas comprovadas</div>
-                <div class="text-2xl font-bold"><span class="brand-gradient">R$ 5.000+</span></div>
+                <div class="text-sm text-gray-400">Vendas comprovadas</div>
+                <div class="text-2xl font-bold"><span class="brand-gradient glow-effect">R$ 5.000+</span></div>
               </div>
             </div>
           </div>
           <div class="order-1 md:order-2 flex justify-center">
             <div class="float relative">
-              <div class="w-40 h-40 md:w-56 md:h-56 rounded-full glass flex items-center justify-center shadow-neon-lg ring-1 ring-white/10">
+              <div class="w-40 h-40 md:w-56 md:h-56 rounded-full glass flex items-center justify-center shadow-neon-lg ring-1 ring-white/10 pulse-slow">
                 <div class="text-5xl md:text-7xl font-extrabold brand-gradient">LS</div>
               </div>
               <div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-green-400/20 border border-green-400/40 grid place-items-center spin-slow">
-                <i class="fa-solid fa-star text-brand-greenBright"></i>
+                <i class="fa-solid fa-star text-green-400"></i>
               </div>
               <div class="absolute -bottom-6 -left-6 w-16 h-16 rounded-full bg-green-400/20 border border-green-400/40 grid place-items-center spin-slow">
-                <i class="fa-solid fa-rocket text-brand-greenBright"></i>
+                <i class="fa-solid fa-rocket text-green-400"></i>
+              </div>
+              
+              <!-- Elementos voadores ao redor do logo -->
+              <div class="flying-coin absolute -top-8 -right-8">
+                <i class="fas fa-coins text-yellow-300"></i>
+              </div>
+              <div class="flying-star absolute -top-12 -left-8 text-yellow-400">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="flying-coin absolute -bottom-8 -right-12">
+                <i class="fas fa-gem text-purple-300"></i>
+              </div>
+              <div class="flying-star absolute -bottom-12 -left-12 text-pink-400">
+                <i class="fas fa-heart"></i>
               </div>
             </div>
           </div>
@@ -233,34 +487,47 @@
     </section>
 
     <!-- About -->
-    <section id="about" class="py-20 bg-panel">
+    <section id="about" class="py-20 bg-gray-900">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-white mb-4">Sobre Mim</h2>
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="text-4xl font-bold text-white mb-4 glow-effect">Sobre Mim</h2>
           <div class="divider"></div>
-          <p class="text-muted text-lg max-w-2xl mx-auto">Ajudando pessoas a conquistarem independência financeira através do empreendedorismo digital.</p>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">Ajudando pessoas a conquistarem independência financeira através do empreendedorismo digital.</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div class="fade-in-up">
             <h3 class="text-2xl font-bold text-white mb-6">Transformando Vidas Através do Empreendedorismo Digital</h3>
-            <p class="text-muted mb-6 leading-relaxed">
+            <p class="text-gray-400 mb-6 leading-relaxed">
               Sou Lucas Simioni, conhecido como LSGHOST, e minha missão é ajudar pessoas a conquistarem sua independência financeira através do mundo digital. Com mais de R$ 5.000 em vendas comprovadas, desenvolvi métodos únicos e eficazes para quem quer começar ou expandir seus negócios online.
             </p>
             <div class="grid grid-cols-2 gap-6 mb-6">
-              <div class="glass p-6 rounded-xl text-center">
-                <div class="text-3xl font-bold brand-gradient mb-2">5K+</div>
-                <div class="text-muted">Em Vendas</div>
+              <div class="glass p-6 rounded-xl text-center card-hover">
+                <div class="text-3xl font-bold brand-gradient mb-2 pulse">5K+</div>
+                <div class="text-gray-400">Em Vendas</div>
               </div>
-              <div class="glass p-6 rounded-xl text-center">
-                <div class="text-3xl font-bold brand-gradient mb-2">12</div>
-                <div class="text-muted">Produtos</div>
+              <div class="glass p-6 rounded-xl text-center card-hover">
+                <div class="text-3xl font-bold brand-gradient mb-2 pulse">12</div>
+                <div class="text-gray-400">Produtos</div>
               </div>
             </div>
           </div>
-          <div class="text-center">
-            <div class="w-64 h-64 mx-auto bg-gradient-to-br from-brand-greenBright to-brand-greenDeep rounded-full flex items-center justify-center text-white text-8xl font-bold shadow-neon-lg">
+          <div class="text-center fade-in-up">
+            <div class="w-64 h-64 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white text-8xl font-bold shadow-neon-lg pulse-slow relative">
               🚀
+              <!-- Elementos voadores ao redor do foguete -->
+              <div class="flying-coin absolute -top-4 -left-8">
+                <i class="fas fa-coins text-yellow-300"></i>
+              </div>
+              <div class="flying-star absolute -top-6 -right-6 text-yellow-400">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="flying-coin absolute -bottom-4 -right-8">
+                <i class="fas fa-gem text-purple-300"></i>
+              </div>
+              <div class="flying-star absolute -bottom-6 -left-6 text-pink-400">
+                <i class="fas fa-heart"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -268,30 +535,37 @@
     </section>
 
     <!-- Why Choose -->
-    <section class="py-20 gradient-bg text-white">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Por Que Escolher Meus Produtos?</h2>
+    <section class="py-20 gradient-bg text-white relative">
+      <!-- Partículas de fundo -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="particle absolute top-1/4 left-1/4" style="animation-delay: 0.5s;"></div>
+        <div class="particle absolute top-1/3 right-1/3" style="animation-delay: 1.5s;"></div>
+        <div class="particle absolute bottom-1/4 left-1/3" style="animation-delay: 2.5s;"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="text-4xl font-bold mb-4 glow-effect">Por Que Escolher Meus Produtos?</h2>
           <div class="divider"></div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8 mb-12">
-          <div class="glass p-8 rounded-xl text-center">
-            <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-3xl mb-6">
+          <div class="glass p-8 rounded-xl text-center card-hover fade-in-up">
+            <div class="w-20 h-20 mx-auto bg-green-400/20 rounded-full flex items-center justify-center text-3xl mb-6 pulse-slow">
               ⚡
             </div>
             <h3 class="text-xl font-bold mb-4">Resultados Rápidos</h3>
             <p class="text-white/90">Métodos testados que já geraram mais de R$ 5.000 em vendas comprovadas</p>
           </div>
-          <div class="glass p-8 rounded-xl text-center">
-            <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-3xl mb-6">
+          <div class="glass p-8 rounded-xl text-center card-hover fade-in-up">
+            <div class="w-20 h-20 mx-auto bg-green-400/20 rounded-full flex items-center justify-center text-3xl mb-6 pulse-slow">
               💎
             </div>
             <h3 class="text-xl font-bold mb-4">Conteúdo Premium</h3>
             <p class="text-white/90">Informações exclusivas e estratégias que realmente funcionam no mercado atual</p>
           </div>
-          <div class="glass p-8 rounded-xl text-center">
-            <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-3xl mb-6">
+          <div class="glass p-8 rounded-xl text-center card-hover fade-in-up">
+            <div class="w-20 h-20 mx-auto bg-green-400/20 rounded-full flex items-center justify-center text-3xl mb-6 pulse-slow">
               🎯
             </div>
             <h3 class="text-xl font-bold mb-4">Foco na Prática</h3>
@@ -299,8 +573,8 @@
           </div>
         </div>
 
-        <div class="text-center">
-          <div class="inline-block bg-brand-greenBright text-black px-8 py-4 rounded-full font-bold text-lg">
+        <div class="text-center fade-in-up">
+          <div class="inline-block bg-green-400 text-black px-8 py-4 rounded-full font-bold text-lg pulse">
             🔥 Mais de 1000+ pessoas já transformaram suas vidas!
           </div>
         </div>
@@ -308,17 +582,17 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="py-20 bg-panel">
+    <section class="py-20 bg-gray-900">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-white mb-4">O Que Dizem Sobre Meus Produtos</h2>
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="text-4xl font-bold text-white mb-4 glow-effect">O Que Dizem Sobre Meus Produtos</h2>
           <div class="divider"></div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="glass p-6 rounded-xl">
+          <div class="glass p-6 rounded-xl card-hover fade-in-up">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-brand-greenBright rounded-full flex items-center justify-center text-black font-bold mr-4">
+              <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center text-black font-bold mr-4 pulse">
                 M
               </div>
               <div>
@@ -326,12 +600,12 @@
                 <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
               </div>
             </div>
-            <p class="text-muted italic">"Consegui meus primeiros R$ 500 online em apenas 2 semanas seguindo as estratégias do Lucas!"</p>
+            <p class="text-gray-400 italic">"Consegui meus primeiros R$ 500 online em apenas 2 semanas seguindo as estratégias do Lucas!"</p>
           </div>
 
-          <div class="glass p-6 rounded-xl">
+          <div class="glass p-6 rounded-xl card-hover fade-in-up">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
+              <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-4 pulse">
                 J
               </div>
               <div>
@@ -339,12 +613,12 @@
                 <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
               </div>
             </div>
-            <p class="text-muted italic">"O PACK +1000 VÍDEOS mudou minha vida! Agora trabalho de casa e ganho mais que no emprego."</p>
+            <p class="text-gray-400 italic">"O PACK +1000 VÍDEOS mudou minha vida! Agora trabalho de casa e ganho mais que no emprego."</p>
           </div>
 
-          <div class="glass p-6 rounded-xl">
+          <div class="glass p-6 rounded-xl card-hover fade-in-up">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-brand-greenBright rounded-full flex items-center justify-center text-black font-bold mr-4">
+              <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center text-black font-bold mr-4 pulse">
                 A
               </div>
               <div>
@@ -352,17 +626,25 @@
                 <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
               </div>
             </div>
-            <p class="text-muted italic">"Conteúdo direto e sem enrolação. Recomendo para quem quer resultados reais!"</p>
+            <p class="text-gray-400 italic">"Conteúdo direto e sem enrolação. Recomendo para quem quer resultados reais!"</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Products -->
-    <section id="products" class="py-20 gradient-bg">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-white mb-4">Meus Produtos Digitais</h2>
+    <section id="products" class="py-20 gradient-bg relative">
+      <!-- Partículas decorativas -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="particle absolute top-1/4 left-1/4" style="animation-delay: 0s;"></div>
+        <div class="particle absolute top-1/3 right-1/3" style="animation-delay: 1s;"></div>
+        <div class="particle absolute bottom-1/4 left-1/3" style="animation-delay: 2s;"></div>
+        <div class="particle absolute top-2/3 right-1/4" style="animation-delay: 3s;"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 fade-in-up">
+          <h2 class="text-4xl font-bold text-white mb-4 glow-effect">Meus Produtos Digitais</h2>
           <div class="divider"></div>
           <p class="text-xl text-white/90 max-w-2xl mx-auto">Produtos testados e aprovados que já geraram mais de R$ 5.000 em vendas</p>
         </div>
@@ -370,189 +652,204 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
           <!-- DESTAQUE: PACK +1000 VÍDEOS -->
-          <div class="glass p-8 rounded-2xl shadow-neon-lg card-hover md:col-span-2 lg:col-span-3 pulse-slow relative">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+          <div class="glass p-8 rounded-2xl shadow-neon-lg card-hover md:col-span-2 lg:col-span-3 pulse-slow relative fade-in-up">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-bold pulse">
               🔥 MELHOR PRODUTO
             </div>
-            <div class="text-center mt-4">
-              <div class="w-20 h-20 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-brand-greenBright text-3xl mb-6 spin-slow">
+            <div class="text-center mt-4 relative">
+              <div class="w-20 h-20 mx-auto bg-green-400/20 rounded-full flex items-center justify-center text-green-400 text-3xl mb-6 spin-slow">
                 ⚡
               </div>
-              <h3 class="text-3xl font-extrabold text-white mb-6 drop-shadow">PACK +1000 VÍDEOS</h3>
-              <div class="text-4xl font-extrabold brand-gradient mb-6">R$ 17,97</div>
+              <!-- Elemento voador múltiplo ao redor do produto principal -->
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 multiple-orbit">
+                <div class="orbit-item w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                  <i class="fas fa-fire text-white"></i>
+                </div>
+                <div class="orbit-item w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                  <i class="fas fa-star text-green-800"></i>
+                </div>
+                <div class="orbit-item w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center">
+                  <i class="fas fa-gem text-blue-800"></i>
+                </div>
+                <div class="orbit-item w-6 h-6 bg-pink-400 rounded-full flex items-center justify-center">
+                  <i class="fas fa-heart text-pink-800"></i>
+                </div>
+              </div>
+              <h3 class="text-3xl font-extrabold text-white mb-6 drop-shadow glow-effect">PACK +1000 VÍDEOS</h3>
+              <div class="text-4xl font-extrabold brand-gradient mb-6 pulse">R$ 17,97</div>
               <a href="https://pay.kirvano.com/bca9009c-9bd9-466a-b86e-d286806bf064" target="_blank"
-                class="inline-block w-full btn-cta text-center py-4 rounded-lg font-bold text-lg transition-all shadow-neon-md">
+                class="inline-block w-full btn-cta text-center py-4 rounded-lg font-bold text-lg transition-all shadow-neon-md hover:scale-105">
                 Comprar Agora 🚀
               </a>
             </div>
           </div>
 
           <!-- Product 1 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-brand-greenBright text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-green-400/20 rounded-full flex items-center justify-center text-green-400 text-2xl mb-6 pulse">
                 💰
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como Ganhar Dinheiro Online de Forma Inteligente</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
               <a href="https://pay.kirvano.com/9dc71c48-d963-4c2a-a36f-e9e1aef16521" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 2 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-blue-400/20 rounded-full flex items-center justify-center text-blue-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-blue-400/20 rounded-full flex items-center justify-center text-blue-400 text-2xl mb-6 pulse">
                 📚
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como vender produtos digitais (eBooks, cursos e mais)</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
               <a href="https://pay.kirvano.com/35a349ed-19b4-455e-a2c6-368a770ce9ab" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 3 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-red-400/20 rounded-full flex items-center justify-center text-red-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-red-400/20 rounded-full flex items-center justify-center text-red-400 text-2xl mb-6 pulse">
                 📱
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como viver de conteúdo (YouTube, TikTok, Instagram)</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
               <a href="https://pay.kirvano.com/886289d3-9d2a-4a76-9b4f-a6c62d22d571" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 4 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-purple-400/20 rounded-full flex items-center justify-center text-purple-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-purple-400/20 rounded-full flex items-center justify-center text-purple-400 text-2xl mb-6 pulse">
                 🤖
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como aprender Inteligência Artificial do zero</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
               <a href="https://pay.kirvano.com/d1f61f1b-dabd-42b2-96e1-e91d03f8f0a9" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 5 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-yellow-400/20 rounded-full flex items-center justify-center text-yellow-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-yellow-400/20 rounded-full flex items-center justify-center text-yellow-400 text-2xl mb-6 pulse">
                 🏢
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como criar um negócio com pouco dinheiro</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
               <a href="https://pay.kirvano.com/9106f71a-4187-4c4f-9beb-0369dda390b9" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 6 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-indigo-400/20 rounded-full flex items-center justify-center text-indigo-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-indigo-400/20 rounded-full flex items-center justify-center text-indigo-400 text-2xl mb-6 pulse">
                 🏠
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como trabalhar de casa e ser autônomo</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
               <a href="https://pay.kirvano.com/ece6f5c8-09af-4491-8563-7a3b75b9b711" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 7 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-teal-400/20 rounded-full flex items-center justify-center text-teal-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-teal-400/20 rounded-full flex items-center justify-center text-teal-400 text-2xl mb-6 pulse">
                 🤝
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como fazer uma renda mensal com afiliados ou freelas</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 14,97</div>
               <a href="https://pay.kirvano.com/f36921c7-a85f-4556-8a73-1a100b9a5148" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 8 (Premium) -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 border border-red-400 relative">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-400 text-white px-4 py-1 rounded-full text-sm font-bold">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 border border-red-400 relative fade-in-up">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-400 text-white px-4 py-1 rounded-full text-sm font-bold pulse">
               PREMIUM
             </div>
             <div class="text-center mt-4">
-              <div class="w-16 h-16 mx-auto bg-orange-400/20 rounded-full flex items-center justify-center text-orange-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-orange-400/20 rounded-full flex items-center justify-center text-orange-400 text-2xl mb-6 pulse">
                 ⚡
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como ganhar dinheiro fácil (Ebook COMPLETO)</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 134,97</div>
               <a href="https://pay.kirvano.com/b1a29179-636e-4610-8537-c58aa2055166" target="_blank" 
-                class="block w-full bg-gradient-to-r from-red-600 to-orange-600 hover:opacity-90 text-white text-center py-3 rounded-lg font-semibold transition-all">
+                class="block w-full bg-gradient-to-r from-red-600 to-orange-600 hover:opacity-90 text-white text-center py-3 rounded-lg font-semibold transition-all hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 9 (Mais vendido) -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 border border-orange-400 relative">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-400 text-black px-4 py-1 rounded-full text-sm font-bold">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 border border-orange-400 relative fade-in-up">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-400 text-black px-4 py-1 rounded-full text-sm font-bold pulse">
               MAIS VENDIDO
             </div>
             <div class="text-center mt-4">
-              <div class="w-16 h-16 mx-auto bg-gradient-to-r from-brand-greenBright/20 to-orange-400/20 rounded-full flex items-center justify-center text-brand-greenBright text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-gradient-to-r from-green-400/20 to-orange-400/20 rounded-full flex items-center justify-center text-green-400 text-2xl mb-6 pulse">
                 🎬
               </div>
               <h3 class="text-xl font-bold text-white mb-4">PAC 284 VÍDEOS</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 9,90</div>
               <a href="https://pay.kirvano.com/d7b27568-3ad1-4ec6-b1d1-dfe3e349a426" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-all">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-all hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 10 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-pink-400/20 rounded-full flex items-center justify-center text-pink-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-pink-400/20 rounded-full flex items-center justify-center text-pink-400 text-2xl mb-6 pulse">
                 📅
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Planner de Conteúdo para Redes Sociais – 2025</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 9,87</div>
               <a href="https://pay.kirvano.com/37ff57df-1178-43c0-96ad-1dfffb73ef8c" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
           </div>
 
           <!-- Product 11 -->
-          <div class="glass rounded-xl shadow-neon-sm card-hover p-6">
+          <div class="glass rounded-xl shadow-neon-sm card-hover p-6 fade-in-up">
             <div class="text-center">
-              <div class="w-16 h-16 mx-auto bg-cyan-400/20 rounded-full flex items-center justify-center text-cyan-400 text-2xl mb-6">
+              <div class="w-16 h-16 mx-auto bg-cyan-400/20 rounded-full flex items-center justify-center text-cyan-400 text-2xl mb-6 pulse">
                 🔥
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Como Fazer Dinheiro com Conteúdos Virais e Memes</h3>
               <div class="text-2xl font-bold brand-gradient mb-6">R$ 10,97</div>
               <a href="https://pay.kirvano.com/8f714525-c3dc-40f0-b62a-3375013d2479" target="_blank" 
-                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors">
+                class="block w-full btn-cta text-center py-3 rounded-lg font-semibold transition-colors hover:scale-105">
                 Comprar Agora
               </a>
             </div>
@@ -563,38 +860,45 @@
     </section>
 
     <!-- Guarantee -->
-    <section class="py-20 bg-panel">
+    <section class="py-20 bg-gray-900">
       <div class="max-w-4xl mx-auto px-6 text-center">
-        <div class="w-24 h-24 mx-auto bg-brand-greenBright/20 rounded-full flex items-center justify-center text-brand-greenBright text-4xl mb-8">
+        <div class="w-24 h-24 mx-auto bg-green-400/20 rounded-full flex items-center justify-center text-green-400 text-4xl mb-8 pulse-slow">
           🛡️
         </div>
-        <h2 class="text-4xl font-bold text-white mb-6">Garantia de Satisfação</h2>
-        <p class="text-xl text-muted mb-8">Estou tão confiante na qualidade dos meus produtos que ofereço:</p>
+        <h2 class="text-4xl font-bold text-white mb-6 glow-effect">Garantia de Satisfação</h2>
+        <p class="text-xl text-gray-400 mb-8">Estou tão confiante na qualidade dos meus produtos que ofereço:</p>
 
         <div class="grid md:grid-cols-2 gap-8 mb-12">
-          <div class="glass p-6 rounded-xl">
-            <div class="text-4xl mb-4">✅</div>
+          <div class="glass p-6 rounded-xl card-hover fade-in-up">
+            <div class="text-4xl mb-4 pulse">✅</div>
             <h3 class="text-xl font-bold mb-2 text-white">Conteúdo de Qualidade</h3>
-            <p class="text-muted">Informações práticas e atualizadas que realmente funcionam no mercado atual</p>
+            <p class="text-gray-400">Informações práticas e atualizadas que realmente funcionam no mercado atual</p>
           </div>
-          <div class="glass p-6 rounded-xl">
-            <div class="text-4xl mb-4">🚀</div>
+          <div class="glass p-6 rounded-xl card-hover fade-in-up">
+            <div class="text-4xl mb-4 pulse">🚀</div>
             <h3 class="text-xl font-bold mb-2 text-white">Resultados Comprovados</h3>
-            <p class="text-muted">Mais de R$ 5.000 em vendas usando exatamente essas estratégias</p>
+            <p class="text-gray-400">Mais de R$ 5.000 em vendas usando exatamente essas estratégias</p>
           </div>
         </div>
 
-        <div class="glass p-8 rounded-xl">
-          <h3 class="text-2xl font-bold mb-4 text-white">💰 Invista em Você Hoje!</h3>
-          <p class="text-lg text-muted">Cada dia que você adia é um dia a menos para começar a ganhar dinheiro online. Comece agora!</p>
+        <div class="glass p-8 rounded-xl card-hover fade-in-up">
+          <h3 class="text-2xl font-bold mb-4 text-white glow-effect">💰 Invista em Você Hoje!</h3>
+          <p class="text-lg text-gray-400">Cada dia que você adia é um dia a menos para começar a ganhar dinheiro online. Comece agora!</p>
         </div>
       </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-20 gradient-bg text-white">
-      <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-6">Vamos Conectar?</h2>
+    <section id="contact" class="py-20 gradient-bg text-white relative">
+      <!-- Partículas de fundo -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="particle absolute top-1/4 left-1/4" style="animation-delay: 0s;"></div>
+        <div class="particle absolute top-1/3 right-1/3" style="animation-delay: 2s;"></div>
+        <div class="particle absolute bottom-1/4 left-1/3" style="animation-delay: 4s;"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+        <h2 class="text-4xl font-bold mb-6 glow-effect">Vamos Conectar?</h2>
         <div class="divider mb-8"></div>
         <p class="text-xl mb-12 max-w-2xl mx-auto">Siga-me nas redes sociais para conteúdo exclusivo sobre empreendedorismo digital</p>
 
@@ -610,8 +914,8 @@
           </a>
         </div>
 
-        <div class="glass rounded-xl p-8 max-w-2xl mx-auto">
-          <h3 class="text-2xl font-bold mb-4">💡 Dica Gratuita</h3>
+        <div class="glass rounded-xl p-8 max-w-2xl mx-auto card-hover fade-in-up">
+          <h3 class="text-2xl font-bold mb-4 glow-effect">💡 Dica Gratuita</h3>
           <p class="text-lg text-white/90">O primeiro passo para o sucesso online é começar. Não espere o momento perfeito, comece hoje mesmo com pequenas ações!</p>
         </div>
       </div>
@@ -620,7 +924,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12">
+  <footer class="bg-black text-white py-12">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-8">
         <div class="text-3xl font-bold mb-4 brand-gradient">LSGHOST</div>
@@ -631,10 +935,10 @@
       <div class="border-t border-gray-800 pt-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <nav class="flex flex-wrap justify-center gap-6">
-            <a href="#home" class="text-gray-400 hover:text-brand-greenBright transition-colors">Início</a>
-            <a href="#about" class="text-gray-400 hover:text-brand-greenBright transition-colors">Sobre</a>
-            <a href="#products" class="text-gray-400 hover:text-brand-greenBright transition-colors">Produtos</a>
-            <a href="#contact" class="text-gray-400 hover:text-brand-greenBright transition-colors">Contato</a>
+            <a href="#home" class="text-gray-400 hover:text-green-400 transition-colors">Início</a>
+            <a href="#about" class="text-gray-400 hover:text-green-400 transition-colors">Sobre</a>
+            <a href="#products" class="text-gray-400 hover:text-green-400 transition-colors">Produtos</a>
+            <a href="#contact" class="text-gray-400 hover:text-green-400 transition-colors">Contato</a>
           </nav>
           
           <div class="flex items-center gap-4">
@@ -740,7 +1044,7 @@
     }, observerOptions);
 
     // Observe elements for fade-in animation
-    document.querySelectorAll('.glass, .card-hover').forEach(el => {
+    document.querySelectorAll('.fade-in-up').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -763,11 +1067,37 @@
         }
       }, 100);
     });
-  </script>
 
-  <!-- Cloudflare Challenge (Opcional) -->
-  <script>
-    (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97310b30d1c2830f',t:'MTc1NTg1MTc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+    // Create floating particles dynamically
+    function createFloatingParticles() {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        if (section.classList.contains('gradient-bg')) {
+          for (let i = 0; i < 3; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            section.appendChild(particle);
+          }
+        }
+      });
+    }
+
+    // Initialize particles
+    createFloatingParticles();
+
+    // Add hover effects to cards
+    document.querySelectorAll('.card-hover').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-12px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
   </script>
 
 </body>
